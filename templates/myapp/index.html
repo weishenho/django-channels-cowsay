@@ -1,0 +1,37 @@
+<html>
+{% load staticfiles %}
+<head>
+    <script src="{% static "js/jquery-1.12.2.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/reconnecting-websocket.min.js" %}" type="text/javascript"></script>q
+</head>
+
+<body>
+
+    <div id="price">
+    </div>
+
+
+    <script>
+        $(function () {
+            // Correctly decide between ws:// and wss://
+            var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+            var ws_path = ws_scheme + '://' + window.location.host + "/chat/";
+            var socket = new ReconnectingWebSocket(ws_path);
+
+            // Handle incoming messages
+            socket.onmessage = function (e) {
+                console.log(e.data)
+                $("#price div").text(e.data)
+            };
+            // Helpful debugging
+            socket.onopen = function () {
+                console.log("Connected to chat socket");
+            };
+            socket.onclose = function () {
+                console.log("Disconnected from chat socket");
+            }
+        });
+    </script>
+
+</body>
+</html>
