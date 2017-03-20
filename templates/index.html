@@ -21,9 +21,9 @@
 </head>
 
 <body>
-
+    <center><h1><div>fortune | cowsay</div></h1></center>
     <div class="float_center">
-        <pre class="child" id="price"></pre>
+        <pre class="child" id="reading"></pre>
     </div>
 
     
@@ -42,7 +42,7 @@
 
             socket.onmessage = function(e) {
                 console.log(e);
-                $("#price").text(e.data);
+                $("#reading").text(e.data);
 
             };
             // Helpful debugging
