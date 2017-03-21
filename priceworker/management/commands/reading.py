@@ -16,10 +16,11 @@ class Command(BaseCommand):
         while True:
             #x = subprocess.check_output(['fortune'])
 
+            #cmd = "/usr/games/fortune | /usr/games/cowsay"
             cmd = "fortune | cowsay"
             ps = subprocess.Popen(cmd,shell=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
             x = ps.communicate()[0]
             #xl = x.split("\n")
             Group("chat").send({'text': x})
-            time.sleep(10)
-            print x
+            time.sleep(5)
+            #print x

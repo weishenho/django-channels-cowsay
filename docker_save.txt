@@ -1,0 +1,5 @@
+docker save -o docker_images/mychannels_web_latest mychannels_web:latest
+docker save -o redis_latest.tar redis:latest
+
+docker load -i docker_images/redis_latest.tar
+docker load -i docker_images/mychannels_web_latest

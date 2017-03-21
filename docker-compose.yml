@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  redis:
+    image: redis:latest
+  web:
+    build: .
+    command: sh startup.sh
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    links:
+      - redis
