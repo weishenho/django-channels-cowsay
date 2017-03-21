@@ -23,10 +23,10 @@
 <body>
     <center><h1><div>fortune | cowsay</div></h1></center>
     <div class="float_center">
-        <pre class="child" id="reading">Wait 5 seconds...</pre>
+        <pre class="child" id="cowsay">Wait 5 seconds...</pre>
+        <pre class="child" id="cowthink" style="padding-top: 50px;">Wait 5 seconds...</pre>
     </div>
 
-    
     <script>
         $(function() {
             // Correctly decide between ws:// and wss://
@@ -42,7 +42,9 @@
 
             socket.onmessage = function(e) {
                 console.log(e);
-                $("#reading").text(e.data);
+                var data = JSON.parse(e.data);
+                $("#cowsay").text(data.say);
+                $("#cowthink").text(data.think);
 
             };
             // Helpful debugging

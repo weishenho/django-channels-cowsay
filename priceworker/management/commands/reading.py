@@ -14,13 +14,18 @@ class Command(BaseCommand):
     # A command must define handle()
     def handle(self, *args, **options):
         while True:
-            #x = subprocess.check_output(['fortune'])
-
-            #cmd = "/usr/games/fortune | /usr/games/cowsay"
             cmd = "fortune | cowsay"
             ps = subprocess.Popen(cmd,shell=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
             x = ps.communicate()[0]
-            #xl = x.split("\n")
-            Group("chat").send({'text': x})
+
+            cmd = "fortune | cowthink"
+            ps = subprocess.Popen(cmd,shell=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+            y = ps.communicate()[0]
+
+            cowtext = {
+                "say": x,
+                "think": y
+            }
+
+            Group("chat").send({'text': json.dumps(cowtext)})
             time.sleep(5)
-            #print x
